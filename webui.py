@@ -573,4 +573,5 @@ with gr.Blocks(css=block_css, theme=gr.themes.Default(**default_theme_args)) as 
          server_port=7860,
          show_api=False,
          share=False,
-         inbrowser=False))
+         inbrowser=False,
+         auth=("capp","capp")))
