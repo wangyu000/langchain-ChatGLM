@@ -4,7 +4,7 @@ import os
 import logging
 import uuid
 
-DOWNLOAD_BASE_DIR = "/home/imuser/new_disk/langchain-chatglm/downloads"
+DOWNLOAD_BASE_DIR = "/home/imuser/new_disk/models"
 
 LOG_FORMAT = "%(levelname) -5s %(asctime)s" "-1d: %(message)s"
 logger = logging.getLogger()
