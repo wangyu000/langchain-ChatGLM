@@ -4,6 +4,8 @@ import os
 import logging
 import uuid
 
+DOWNLOAD_BASE_DIR = "/home/imuser/new_disk/langchain-chatglm/downloads"
+
 LOG_FORMAT = "%(levelname) -5s %(asctime)s" "-1d: %(message)s"
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -13,12 +15,12 @@ logging.basicConfig(format=LOG_FORMAT)
 # 如将 "text2vec": "GanymedeNil/text2vec-large-chinese" 修改为 "text2vec": "User/Downloads/text2vec-large-chinese"
 # 此处请写绝对路径
 embedding_model_dict = {
-    "ernie-tiny": "nghuyong/ernie-3.0-nano-zh",
-    "ernie-base": "nghuyong/ernie-3.0-base-zh",
-    "text2vec-base": "shibing624/text2vec-base-chinese",
-    "text2vec": "GanymedeNil/text2vec-large-chinese",
-    "m3e-small": "moka-ai/m3e-small",
-    "m3e-base": "moka-ai/m3e-base",
+    "ernie-tiny": DOWNLOAD_BASE_DIR + "/ernie-3.0-nano-zh",
+    "ernie-base": DOWNLOAD_BASE_DIR + "/ernie-3.0-base-zh",
+    "text2vec-base": DOWNLOAD_BASE_DIR + "/text2vec-base-chinese",
+    "text2vec": DOWNLOAD_BASE_DIR + "/text2vec-large-chinese",
+    "m3e-small": DOWNLOAD_BASE_DIR + "/moka-ai/m3e-small",
+    "m3e-base": DOWNLOAD_BASE_DIR + "/moka-ai/m3e-base",
 }
 
 # Embedding model name
@@ -36,25 +38,25 @@ llm_model_dict = {
     "chatglm-6b-int4-qe": {
         "name": "chatglm-6b-int4-qe",
         "pretrained_model_name": "THUDM/chatglm-6b-int4-qe",
-        "local_model_path": None,
+        "local_model_path": DOWNLOAD_BASE_DIR + "/chatglm-6b-int4-qe",
         "provides": "ChatGLMLLMChain"
     },
     "chatglm-6b-int4": {
         "name": "chatglm-6b-int4",
         "pretrained_model_name": "THUDM/chatglm-6b-int4",
-        "local_model_path": None,
+        "local_model_path": DOWNLOAD_BASE_DIR + "/chatglm-6b-int4",
         "provides": "ChatGLMLLMChain"
     },
     "chatglm-6b-int8": {
         "name": "chatglm-6b-int8",
         "pretrained_model_name": "THUDM/chatglm-6b-int8",
-        "local_model_path": None,
+        "local_model_path": DOWNLOAD_BASE_DIR + "/chatglm-6b-int8",
         "provides": "ChatGLMLLMChain"
     },
     "chatglm-6b": {
         "name": "chatglm-6b",
         "pretrained_model_name": "THUDM/chatglm-6b",
-        "local_model_path": None,
+        "local_model_path": DOWNLOAD_BASE_DIR + "/chatglm-6b",
         "provides": "ChatGLMLLMChain"
     },
     # langchain-ChatGLM 用户“帛凡” @BoFan-tunning 基于ChatGLM-6B 训练并提供的权重合并模型和 lora 权重文件 chatglm-fitness-RLHF
@@ -63,25 +65,25 @@ llm_model_dict = {
     "chatglm-fitness-RLHF": {
         "name": "chatglm-fitness-RLHF",
         "pretrained_model_name": "fb700/chatglm-fitness-RLHF",
-        "local_model_path": None,
+        "local_model_path": DOWNLOAD_BASE_DIR + "/chatglm-fitness-RLHF",
         "provides": "ChatGLMLLMChain"
     },
     "chatglm2-6b": {
         "name": "chatglm2-6b",
         "pretrained_model_name": "THUDM/chatglm2-6b",
-        "local_model_path": None,
+        "local_model_path": DOWNLOAD_BASE_DIR + "/chatglm2-6b",
         "provides": "ChatGLMLLMChain"
     },
     "chatglm2-6b-int4": {
         "name": "chatglm2-6b-int4",
         "pretrained_model_name": "THUDM/chatglm2-6b-int4",
-        "local_model_path": None,
+        "local_model_path": DOWNLOAD_BASE_DIR + "/chatglm2-6b-int4",
         "provides": "ChatGLMLLMChain"
     },
     "chatglm2-6b-int8": {
         "name": "chatglm2-6b-int8",
         "pretrained_model_name": "THUDM/chatglm2-6b-int8",
-        "local_model_path": None,
+        "local_model_path": DOWNLOAD_BASE_DIR + "/chatglm2-6b-int8",
         "provides": "ChatGLMLLMChain"
     },
     "chatyuan": {
@@ -105,7 +107,7 @@ llm_model_dict = {
     "vicuna-13b-hf": {
         "name": "vicuna-13b-hf",
         "pretrained_model_name": "vicuna-13b-hf",
-        "local_model_path": None,
+        "local_model_path": DOWNLOAD_BASE_DIR + "/vicuna-13b-hf",
         "provides": "LLamaLLMChain"
     },
     "vicuna-7b-hf": {
@@ -159,7 +161,7 @@ llm_model_dict = {
     "fastchat-chatglm-6b": {
         "name": "chatglm-6b",  # "name"修改为fastchat服务中的"model_name"
         "pretrained_model_name": "chatglm-6b",
-        "local_model_path": None,
+        "local_model_path": DOWNLOAD_BASE_DIR + "/chatglm-6b",
         "provides": "FastChatOpenAILLMChain",  # 使用fastchat api时，需保证"provides"为"FastChatOpenAILLMChain"
         "api_base_url": "http://localhost:8000/v1",  # "name"修改为fastchat服务中的"api_base_url"
         "api_key": "EMPTY"
@@ -168,7 +170,7 @@ llm_model_dict = {
     "fastchat-chatglm-6b-int4": {
         "name": "chatglm-6b-int4",  # "name"修改为fastchat服务中的"model_name"
         "pretrained_model_name": "chatglm-6b-int4",
-        "local_model_path": None,
+        "local_model_path": DOWNLOAD_BASE_DIR + "/chatglm-6b-int4",
         "provides": "FastChatOpenAILLMChain",  # 使用fastchat api时，需保证"provides"为"FastChatOpenAILLMChain"
         "api_base_url": "http://localhost:8001/v1",  # "name"修改为fastchat服务中的"api_base_url"
         "api_key": "EMPTY"
@@ -176,7 +178,7 @@ llm_model_dict = {
     "fastchat-chatglm2-6b": {
         "name": "chatglm2-6b",  # "name"修改为fastchat服务中的"model_name"
         "pretrained_model_name": "chatglm2-6b",
-        "local_model_path": None,
+        "local_model_path": DOWNLOAD_BASE_DIR + "/chatglm2-6b",
         "provides": "FastChatOpenAILLMChain",  # 使用fastchat api时，需保证"provides"为"FastChatOpenAILLMChain"
         "api_base_url": "http://localhost:8000/v1"  # "name"修改为fastchat服务中的"api_base_url"
     },
@@ -185,7 +187,7 @@ llm_model_dict = {
     "fastchat-vicuna-13b-hf": {
         "name": "vicuna-13b-hf",  # "name"修改为fastchat服务中的"model_name"
         "pretrained_model_name": "vicuna-13b-hf",
-        "local_model_path": None,
+        "local_model_path": DOWNLOAD_BASE_DIR + "/vicuna-13b-hf",
         "provides": "FastChatOpenAILLMChain",  # 使用fastchat api时，需保证"provides"为"FastChatOpenAILLMChain"
         "api_base_url": "http://localhost:8000/v1",  # "name"修改为fastchat服务中的"api_base_url"
         "api_key": "EMPTY"
@@ -212,7 +214,7 @@ llm_model_dict = {
 }
 
 # LLM 名称
-LLM_MODEL = "chatglm-6b"
+LLM_MODEL = "chatglm2-6b"
 # 量化加载8bit 模型
 LOAD_IN_8BIT = False
 # Load the model with bfloat16 precision. Requires NVIDIA Ampere GPU.
