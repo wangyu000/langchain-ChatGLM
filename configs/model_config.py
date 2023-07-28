@@ -4,7 +4,10 @@ import os
 import logging
 import uuid
 
+# 模型存放目录
 MODEL_BASE_DIR = "/home/imuser/new_disk/models/"
+# 知识库文件存放根目录
+KNOWLEDGE_BASE_DIR = "/home/imuser/new_disk/langchain-chatglm/knowledge_base"
 
 LOG_FORMAT = "%(levelname) -5s %(asctime)s" "-1d: %(message)s"
 logger = logging.getLogger()
@@ -236,7 +239,7 @@ PTUNING_DIR='./ptuning-v2'
 LLM_DEVICE = "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
 
 # 知识库默认存储路径
-KB_ROOT_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "knowledge_base")
+KB_ROOT_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), KNOWLEDGE_BASE_DIR)
 
 # 基于上下文的prompt模版，请务必保留"{question}"和"{context}"
 PROMPT_TEMPLATE = """已知信息：
