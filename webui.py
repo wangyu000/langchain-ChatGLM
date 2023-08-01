@@ -572,5 +572,5 @@ with gr.Blocks(css=block_css, theme=gr.themes.Default(**default_theme_args)) as 
  .launch(server_name='0.0.0.0',
          server_port=8000,
          show_api=False,
-         share=True,
+         share=False,
          inbrowser=False))
